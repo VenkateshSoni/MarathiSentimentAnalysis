@@ -1,2 +1,1 @@
-# MiniProject
-Miniproject
+# Marathi Sentiment Analysis Streamlit App
