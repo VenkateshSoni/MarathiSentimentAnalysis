@@ -22,25 +22,18 @@ def main():
 
     # Input text area for user input
     user_input = st.text_area("Enter a sentence in Marathi")
+    
+    label = r'''
+    $\textsf{
+        \Huge Sentiment
+    }$
+    '''
 
     # Button to trigger sentiment analysis
     if st.button("Analyze Sentiment"):
         if user_input:
             sentiment = analyze_sentiment(user_input)
-            sentiment_type = ""  # Initialize sentiment type
-            if sentiment == "positive":
-                sentiment_type = "positive"
-                sentiment_color = "green"
-            elif sentiment == "negative":
-                sentiment_type = "negative"
-                sentiment_color = "red"
-            else:  # neutral
-                sentiment_type = "neutral"
-                sentiment_color = "darkgrey"
-
-            # Styling the sentiment output
-            styled_sentiment = f"<span style='color:{sentiment_color}; font-weight:bold;'>{sentiment}</span>"
-            st.write("Sentiment:", styled_sentiment, unsafe_allow_html=True)
+            st.write("Sentiment:", label)
         else:
             st.warning("Please enter a sentence.")
 
