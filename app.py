@@ -9,12 +9,13 @@ def query_model(text):
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
-# Function to analyze sentiment and return label
+# Function to analyze sentiment and return label and type
 def analyze_sentiment(text):
     output = query_model(text)
     if isinstance(output, list) and len(output) > 0:
         sentiment_label = output[0][0]['label']
-        return sentiment_label
+        sentiment_type = output[0][0]['sentiment_type']
+        return sentiment_label, sentiment_type
 
 # Streamlit UI
 def main():
@@ -26,8 +27,13 @@ def main():
     # Button to trigger sentiment analysis
     if st.button("Analyze Sentiment"):
         if user_input:
-            sentiment = analyze_sentiment(user_input)
-            st.write("Sentiment:", sentiment)
+            sentiment_label, sentiment_type = analyze_sentiment(user_input)
+            if sentiment_type == "positive":
+                st.write("Sentiment:", f"<span style='color:green; font-weight:bold;'>{sentiment_label}</span>", unsafe_allow_html=True)
+            elif sentiment_type == "negative":
+                st.write("Sentiment:", f"<span style='color:red; font-weight:bold;'>{sentiment_label}</span>", unsafe_allow_html=True)
+            else:  # neutral
+                st.write("Sentiment:", f"<span style='color:darkgrey; font-weight:bold;'>{sentiment_label}</span>", unsafe_allow_html=True)
         else:
             st.warning("Please enter a sentence.")
 
