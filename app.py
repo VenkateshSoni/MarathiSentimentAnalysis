@@ -24,9 +24,7 @@ def main():
     user_input = st.text_area("Enter a sentence in Marathi")
     
     label = r'''
-    $\textsf{
-        \Huge Sentiment
-    }$
+        \Huge {Sentiment}
     '''
 
     # Button to trigger sentiment analysis
