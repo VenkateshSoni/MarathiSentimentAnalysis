@@ -20,14 +20,6 @@ def analyze_sentiment(text):
 def main():
     st.title("Marathi Sentiment Analysis")
 
-    st.markdown("""
-    <style>
-    .big-font {
-        font-size:300px !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
     # Input text area for user input
     user_input = st.text_area("Enter a sentence in Marathi")
 
@@ -35,8 +27,7 @@ def main():
     if st.button("Analyze Sentiment"):
         if user_input:
             sentiment = analyze_sentiment(user_input)
-            # st.write("Sentiment:", sentiment)
-            st.markdown('<p class="big-font">{sentiment}</p>', unsafe_allow_html=True)
+            st.write("Sentiment:", sentiment)
         else:
             st.warning("Please enter a sentence.")
 
