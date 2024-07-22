@@ -27,7 +27,9 @@ def main():
     if st.button("Analyze Sentiment"):
         if user_input:
             sentiment = analyze_sentiment(user_input)
-            st.write("Sentiment:", sentiment)
+            st.write("- ", "Sentiment:", sentiment, """
+            \n
+            """)
         else:
             st.warning("Please enter a sentence.")
 
