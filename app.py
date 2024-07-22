@@ -9,13 +9,12 @@ def query_model(text):
     response = requests.post(API_URL, headers=headers, json=payload)
     return response.json()
 
-# Function to analyze sentiment and return label and type
+# Function to analyze sentiment and return label
 def analyze_sentiment(text):
     output = query_model(text)
     if isinstance(output, list) and len(output) > 0:
         sentiment_label = output[0][0]['label']
-        sentiment_type = output[0][0]['sentiment_type']
-        return sentiment_label, sentiment_type
+        return sentiment_label
 
 # Streamlit UI
 def main():
@@ -27,13 +26,21 @@ def main():
     # Button to trigger sentiment analysis
     if st.button("Analyze Sentiment"):
         if user_input:
-            sentiment_label, sentiment_type = analyze_sentiment(user_input)
-            if sentiment_type == "positive":
-                st.write("Sentiment:", f"<span style='color:green; font-weight:bold;'>{sentiment_label}</span>", unsafe_allow_html=True)
-            elif sentiment_type == "negative":
-                st.write("Sentiment:", f"<span style='color:red; font-weight:bold;'>{sentiment_label}</span>", unsafe_allow_html=True)
+            sentiment = analyze_sentiment(user_input)
+            sentiment_type = ""  # Initialize sentiment type
+            if sentiment == "positive":
+                sentiment_type = "positive"
+                sentiment_color = "green"
+            elif sentiment == "negative":
+                sentiment_type = "negative"
+                sentiment_color = "red"
             else:  # neutral
-                st.write("Sentiment:", f"<span style='color:darkgrey; font-weight:bold;'>{sentiment_label}</span>", unsafe_allow_html=True)
+                sentiment_type = "neutral"
+                sentiment_color = "darkgrey"
+
+            # Styling the sentiment output
+            styled_sentiment = f"<span style='color:{sentiment_color}; font-weight:bold;'>{sentiment}</span>"
+            st.write("Sentiment:", styled_sentiment, unsafe_allow_html=True)
         else:
             st.warning("Please enter a sentence.")
 
