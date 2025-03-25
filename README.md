@@ -2,8 +2,10 @@
 # Marathi Sentiment Analysis App
 
 This Streamlit application provides an interface for performing sentiment analysis on Marathi sentences using a pre-trained model hosted on Hugging Face.
+
 The pretrained model namely `ScriptEdgeAI/MarathiSentiment-Bloom-560m` was **finetuned for Marathi language** improving the **3 class sentiment analysis accuracy**
 by more than **2 times** and **2 class sentiment analysis accuracy** by more than **2.5 times**.
+
 **Link to the model and more details - `https://huggingface.co/ScriptEdgeAI/MarathiSentiment-Bloom-560m`**
 
 ## Features
