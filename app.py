@@ -7,7 +7,16 @@ def query_model(text):
     headers = {"Authorization": "Bearer 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"}
     payload = {"inputs": text}
     response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
+    if response.status_code == 200:
+        try:
+            return response.json()
+        except requests.exceptions.JSONDecodeError:
+            print("Response content is not valid JSON:", response.text)
+            return {"error": "Invalid JSON response"}
+    else:
+        print(f"Request failed with status {response.status_code}")
+        print("Response text:", response.text)
+        return {"error": f"Request failed: {response.status_code}"}
 
 # Function to analyze sentiment and return label
 def analyze_sentiment(text):
