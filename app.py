@@ -1,10 +1,12 @@
 import streamlit as st
 import requests
 
+HUGGINGFACEHUB_API_TOKEN: st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
 # Function to query the Hugging Face model
 def query_model(text):
     API_URL = "https://api-inference.huggingface.co/models/ScriptEdgeAI/MarathiSentiment-Bloom-560m"
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "Bearer HUGGINGFACEHUB_API_TOKEN"}
     payload = {"inputs": text}
     response = requests.post(API_URL, headers=headers, json=payload)
     if response.status_code == 200:
